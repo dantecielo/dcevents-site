@@ -15,37 +15,25 @@
       margin: 0;
       font-family: 'VCR OSD Mono', monospace;
       text-align: center;
+      padding: 2rem 1rem;
     }
     .info {
       font-size: clamp(1.5rem, 6vw, 3.5rem);
       line-height: 1.2;
-      margin: 2rem 0;
-    }
-    .links {
-      display: inline-block;
-      text-align: left;
-    }
-    .links a {
-      display: block;
-      font-size: clamp(1rem, 4vw, 2rem);
-      margin: .5em 0;
-      text-decoration: none;
-      color: black;
-    }
-    .links a:hover {
-      text-decoration: underline;
+      margin-bottom: 2rem;
     }
   </style>
 </head>
 <body>
-  <div class="info">
-    <!-- Paste your actual address or embed code here -->
-    1234 Secret Lane<br>
-    Gotham City<br>
-    (Coordinates: 40.7128° N, 74.0060° W)
-  </div>
-  <div class="links">
-    <a href="index.html">← Back home</a>
-  </div>
+  <script>
+    var pwd = prompt("Enter password for address:");
+    if (pwd === "secgay") {
+      document.body.innerHTML =
+        '<div class="info">Contrà Mure San Rocco 6</div>';
+    } else {
+      alert("Incorrect password");
+      window.location.href = "index.html";
+    }
+  </script>
 </body>
 </html>

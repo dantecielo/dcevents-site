@@ -1,12 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title>01-03-25 Gallery</title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.2">
-  <style type="text/css">
+  <meta charset="UTF-8">
+  <title>01-03-25 Video</title>
+  <style>
     @font-face {
       font-family: 'VCR OSD Mono';
       src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf')
@@ -14,28 +12,30 @@
     }
     body {
       margin: 0;
+      padding: 1rem;
       font-family: 'VCR OSD Mono', monospace;
       text-align: center;
-      padding: 1rem;
+      background: #fff;
+      color: black;
     }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-      gap: 1rem;
+    h1 {
+      margin-top: 2rem;
+      font-size: clamp(1.5rem, 6vw, 3.5rem);
     }
-    .gallery img {
-      max-width: 100%;
+    video {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      margin: 2rem auto;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <header><h1>01-03-25</h1></header>
-  <main class="gallery">
-    <!-- In your terminal run:
-         for f in 01-03-25/*.jpg; do
-           echo "<img src=\"$f\" alt=\"\">"
-         done
-         then paste the output here -->
-  </main>
+  <h1>01-03-25</h1>
+  <video controls>
+    <source src="01-03-25/party-010325.mp4.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
 </body>
 </html>

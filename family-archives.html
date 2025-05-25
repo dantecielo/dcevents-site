@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Content-Style-Type" content="text/css">
-  <title>Family Archives</title>
+  <title>Family Archives (Login)</title>
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="2575.2">
   <style type="text/css">
@@ -15,38 +15,19 @@
       margin: 0;
       font-family: 'VCR OSD Mono', monospace;
       text-align: center;
-    }
-    .info {
-      font-size: clamp(1.5rem, 6vw, 3.5rem);
-      line-height: 1.2;
-      margin: 2rem 0;
-    }
-    .links {
-      display: inline-block;
-      text-align: left;
-    }
-    .links a {
-      display: block;
-      font-size: clamp(1rem, 4vw, 2rem);
-      margin: .5em 0;
-      text-decoration: none;
-      color: black;
-    }
-    .links a:hover {
-      text-decoration: underline;
+      padding-top: 2rem;
     }
   </style>
 </head>
 <body>
-  <div class="info">
-    Family Archives
-  </div>
-  <div class="links">
-    <a href="family.html">Family Photo Archive</a>
-    <!-- add more family-related pages here -->
-  </div>
-  <div class="links">
-    <a href="index.html">← Back home</a>
-  </div>
+  <script>
+    var pwd = prompt("Enter password for family archives:");
+    if (pwd === "dc") {
+      window.location.href = "family-archives-list.html";
+    } else {
+      alert("Incorrect password");
+      window.location.href = "index.html";
+    }
+  </script>
 </body>
 </html>

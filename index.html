@@ -21,14 +21,15 @@
       font-size: clamp(1.5rem, 6vw, 3.5rem);
       line-height: 1.2;
       margin: 2rem 0;
+      font-weight: normal; /* Ensures text is normal weight */
     }
     .links {
       display: flex;
       flex-direction: column;
-      align-items: flex-start; /* Ensures links remain left-aligned */
-      justify-content: center; /* Centers the links block */
-      margin: 0 auto; /* Centers the whole section */
-      width: fit-content; /* Keeps it compact */
+      align-items: flex-start;
+      justify-content: center;
+      margin: 0 auto;
+      width: fit-content;
     }
     .links a {
       display: block;
@@ -36,6 +37,7 @@
       margin: 1.5em 0;
       text-decoration: none;
       color: black;
+      font-weight: normal; /* Ensures links are NOT bold */
     }
     .links a:hover {
       text-decoration: underline;
@@ -47,6 +49,7 @@
     07.06.25<br>
     21.00 – 02.00<br>
     Private location
+  </div>
   <div class="links">
     <a href="location.html">Click for address</a>
     <a href="previous-events.html">Click for previous events</a>

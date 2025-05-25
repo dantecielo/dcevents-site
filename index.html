@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,29 +13,43 @@
       src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf')
            format('truetype');
     }
+
+    /* Reset & base */
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'VCR OSD Mono', monospace;
       text-align: center;
+      padding: 2rem 1rem;
     }
+
+    /* Event info at top */
     .info {
       font-size: clamp(1.5rem, 6vw, 3.5rem);
       line-height: 1.2;
-      margin: 2rem 0;
+      margin-bottom: 2rem;
     }
+
+    /* Stack links, center them, and add big tap areas */
     .links {
-      display: inline-block;
-      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;               /* space between each link */
     }
     .links a {
       display: block;
-      font-size: clamp(1rem, 4vw, 2rem);
-      margin: .5em 0;
+      padding: 0.75rem 1.5rem;   /* larger click/tap area */
+      font-size: clamp(1.25rem, 5vw, 2.5rem);
       text-decoration: none;
       color: black;
+      border: 2px solid black;   /* optional: gives a button-like look */
+      border-radius: 0.25rem;     /* slight rounding */
+      width: 100%;
+      max-width: 300px;          /* cap the width on larger screens */
     }
     .links a:hover {
-      text-decoration: underline;
+      background: #f0f0f0;       /* subtle hover feedback */
     }
   </style>
 </head>

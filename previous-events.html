@@ -9,8 +9,7 @@
   <style type="text/css">
     @font-face {
       font-family: 'VCR OSD Mono';
-      src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf')
-           format('truetype');
+      src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf') format('truetype');
     }
     body {
       margin: 0;
@@ -22,9 +21,8 @@
 </head>
 <body>
   <script>
-    // TODO: replace "YOUR_PREV_PASS" with your real password
     var pwd = prompt("Enter password for previous events:");
-    if (pwd === "YOUR_PREV_PASS") {
+    if (pwd === "dc") {
       window.location.href = "previous-events-archive.html";
     } else {
       alert("Incorrect password");

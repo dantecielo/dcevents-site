@@ -22,11 +22,13 @@
   </style>
 </head>
 <body>
-  <script>
-    var pwd = prompt("Enter password for family archives:");
-    if (pwd === "cielo") {
-      // Adjust this to your list page filename if it differs:
-      window.location.href = "family-archives-list.html";
+    <script>
+-   var pwd = prompt("Enter password for family archives:");
+-   if (pwd === "cielo") {
+-     window.location.href = "family-archives-list.html";
++   var pwd = prompt("Enter password for family archives:");
++   if (pwd === "cielo") {
++     window.location.href = "family-archives.html";
     } else {
       alert("Incorrect password");
       window.location.href = "index.html";

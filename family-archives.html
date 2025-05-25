@@ -22,17 +22,23 @@
     .info {
       font-size: clamp(1.5rem, 6vw, 3.5rem);
       margin-bottom: 2rem;
+      font-weight: normal; /* Ensures the text is not bold */
     }
     .links {
-      display: inline-block;
-      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Left-align links */
+      justify-content: center; /* Center the block */
+      margin: 0 auto; /* Centers the whole section */
+      width: fit-content; /* Keeps it compact */
     }
     .links a {
       display: block;
       font-size: clamp(1rem, 4vw, 2rem);
-      margin: 1rem 0;
+      margin: 1.5em 0; /* Ensures proper spacing */
       text-decoration: none;
       color: black;
+      font-weight: normal; /* Ensures links are not bold */
     }
     .links a:hover {
       text-decoration: underline;

@@ -10,23 +10,55 @@
       src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf')
            format('truetype');
     }
-    body {
+    html, body {
       margin: 0;
-      padding: 3rem 1rem;              /* more vertical padding */
-      font-family: 'VCR OSD Mono', monospace;
-      text-align: center;
+      padding: 0;
       background: #fff;
       color: #000;
+      font-family: 'VCR OSD Mono', monospace;
+      text-align: center;
+      overflow-x: hidden;
     }
-    .info {
-      font-size: clamp(1.75rem, 6vw, 4rem); /* slightly larger */
+    body {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .info-line {
+      font-size: clamp(1.5rem, 6vw, 3rem);
       line-height: 1.3;
-      margin-bottom: 3rem;                  /* more space below */
+      margin: 2rem 0; /* extra vertical spacing */
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block; /* so width exactly fits content */
+      border-right: 0.1em solid transparent; /* cursor-like caret space */
     }
+
+    /* Typing cursor (blinking) */
+    .info-line.typing::after {
+      content: '';
+      display: inline-block;
+      width: 0.1em;
+      background: #000;
+      margin-left: 0.1em;
+      animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { background: transparent; }
+    }
+
+    /* Smaller detail text for cost + address */
     .details {
-      font-size: clamp(1.25rem, 4vw, 2.25rem);
-      line-height: 1.6;
-      margin: 2rem 0;                       /* extra spacing between lines */
+      font-size: clamp(1rem, 4vw, 1.5rem);
+      line-height: 1.5;
+      margin: 1.5rem 0;
     }
     .details a {
       color: black;
@@ -35,22 +67,87 @@
     .details a:hover {
       text-decoration: underline;
     }
+    /* On very small screens, make sure lines are centered */
+    @media (max-width: 350px) {
+      .container {
+        max-width: 90%;
+      }
+      .info-line {
+        font-size: 2rem;
+      }
+      .details {
+        font-size: 1.2rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="info">
-    08.06.25<br>
-    14.45 – 20.00
+  <div class="container">
+    <!-- Each of these <div> lines will type in, one after the other -->
+    <div id="line1" class="info-line"></div>
+    <div id="line2" class="info-line"></div>
+
+    <div id="cost" class="details"></div>
+    <div id="address" class="details"></div>
   </div>
-  <div class="details">
-    15€<br><br>
-    <a
-      href="https://www.google.com/maps?q=Via+Zanella,+23,+36050+Montorso+Vicentino+VI&ftid=0x477f48754a0cbe65:0x4a5b049d1ede99a6&entry=gps"
-      target="_blank"
-    >
-      Via Zanella, 23<br>
-      Montorso Vicentino (VI)
-    </a><br><br>
-  </div>
+
+  <script>
+    // Text content for each line
+    const lines = [
+      { selector: "#line1", text: "08.06.25" },
+      { selector: "#line2", text: "14.45 - 20.00" },
+      { selector: "#cost",  text: "15€" },
+      { selector: "#address", text: "Via Zanella, 23\nMontorso Vicentino (VI)" }
+    ];
+
+    // Typewriter effect: reveals each character of `text` inside element `el`
+    function typeLine(el, text, speed) {
+      return new Promise(resolve => {
+        el.classList.add("typing");
+        let idx = 0;
+        function nextChar() {
+          if (idx < text.length) {
+            // Handle newline specially: insert a <br> when encountering \n
+            if (text[idx] === "\n") {
+              el.innerHTML += "<br>";
+            } else {
+              el.innerHTML += text[idx];
+            }
+            idx++;
+            setTimeout(nextChar, speed);
+          } else {
+            el.classList.remove("typing");
+            resolve(); // done typing this line
+          }
+        }
+        nextChar();
+      });
+    }
+
+    // Run through all lines in sequence
+    async function runTyping() {
+      for (let i = 0; i < lines.length; i++) {
+        const { selector, text } = lines[i];
+        const el = document.querySelector(selector);
+        // If address, wrap in <a> to Google Maps
+        if (selector === "#address") {
+          // Temporarily store raw text; will insert link after typing
+          await typeLine(el, text, 50); // faster speed (50ms)
+          const linkURL = 
+            "https://www.google.com/maps?q=Via+Zanella,+23,+36050+Montorso+Vicentino+VI&ftid=0x477f48754a0cbe65:0x4a5b049d1ede99a6&entry=gps";
+          // Replace content with an <a> tag
+          el.innerHTML = `<a href="${linkURL}" target="_blank">${el.innerText}</a>`;
+        } else {
+          // For other lines, just type normally
+          await typeLine(el, text, 50); // faster speed (50ms)
+        }
+        // pause briefly between lines
+        await new Promise(res => setTimeout(res, 200)); // shorter pause
+      }
+    }
+
+    // Kick off the typing animation
+    runTyping();
+  </script>
 </body>
 </html>

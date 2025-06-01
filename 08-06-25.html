@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <title>08-06-25 Event Info</title>
-  <!-- Make sure mobile browsers scale appropriately -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <style>
-    /* Load the custom VCR OSD Mono font */
+    /* Load VCR OSD Mono font */
     @font-face {
       font-family: 'VCR OSD Mono';
       src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf')
@@ -23,34 +21,35 @@
       font-family: 'VCR OSD Mono', monospace;
       text-align: center;
       overflow-x: hidden;
+      height: 100%;
     }
 
     body {
       display: flex;
-      align-items: center;          /* vertically center container */
-      justify-content: center;      /* horizontally center container */
-      min-height: 100vh;            /* push content to true vertical center */
+      align-items: center;          /* vertical centering */
+      justify-content: center;      /* horizontal centering */
+      min-height: 100vh;
       padding: 1rem;
     }
 
     .container {
       width: 100%;
-      max-width: 360px;             /* limit width so text is big on phone */
+      max-width: 360px;
       margin: 0 auto;
     }
 
-    /* All lines use identical sizing via clamp */
+    /* All four lines share identical sizing via clamp */
     .info-line {
       font-size: clamp(2rem, 8vw, 5rem);
       line-height: 1.2;
-      margin: 2rem 0;               /* vertical spacing */
+      margin: 2rem 0;               /* vertical gap */
       white-space: nowrap;
       overflow: hidden;
-      display: inline-block;        /* shrink-to-fit text for typing effect */
-      border-right: 0.1em solid transparent;
+      display: inline-block;        /* shrink‐to‐fit for typing effect */
+      border-right: 0.1em solid transparent; /* caret space */
     }
 
-    /* Blinking cursor after typing */
+    /* Blinking cursor during typing */
     .info-line.typing::after {
       content: '';
       display: inline-block;
@@ -64,7 +63,7 @@
       50% { background: transparent; }
     }
 
-    /* The clickable address will live inside this class, same sizing */
+    /* Make the address portion clickable */
     .info-line a {
       color: black;
       text-decoration: none;
@@ -73,7 +72,7 @@
       text-decoration: underline;
     }
 
-    /* If the screen is extremely narrow (<320px), slightly reduce clamp max */
+    /* Slightly reduce maximum font-size on very narrow screens */
     @media (max-width: 320px) {
       .info-line {
         font-size: clamp(1.8rem, 9vw, 4rem);
@@ -90,73 +89,72 @@
   </div>
 
   <script>
-    // The four lines of text (in order)
-    // The "\n" in the last line will become a <br> before linking
-    const lines = [
+    /* 
+      We have four separate lines. 
+      Notice that line4’s text contains "\n" which we will convert into a <br>.
+    */
+    const linesData = [
       { id: "line1", text: "08.06.25" },
       { id: "line2", text: "14.45 – 20.00" },
       { id: "line3", text: "15€" },
-      { id: "line4", text: "Via Zanella, 23\\nMontorso Vicentino (VI)" }
+      { id: "line4", text: "Via Zanella, 23\nMontorso Vicentino (VI)" }
     ];
 
     /**
-     * Types each character of `text` into the element `el`
-     * at a speed of `speed` milliseconds per character.
-     * Returns a Promise that resolves when done.
+     * Types each character of `text` into `element` at `speed` ms per char.
+     * Returns a Promise that resolves once typing finishes.
      */
-    function typeIt(el, text, speed) {
+    function typeText(element, text, speed) {
       return new Promise(resolve => {
-        el.classList.add("typing");
-        let idx = 0;
-        function step() {
-          if (idx < text.length) {
-            if (text[idx] === "\\n") {
-              // line break
-              el.innerHTML += "<br>";
+        element.classList.add("typing");
+        let index = 0;
+        function nextChar() {
+          if (index < text.length) {
+            if (text[index] === "\n") {
+              element.innerHTML += "<br>";
             } else {
-              el.innerHTML += text[idx];
+              element.innerHTML += text[index];
             }
-            idx++;
-            setTimeout(step, speed);
+            index++;
+            setTimeout(nextChar, speed);
           } else {
-            el.classList.remove("typing");
+            element.classList.remove("typing");
             resolve();
           }
         }
-        step();
+        nextChar();
       });
     }
 
     /**
-     * Runs the typing for all lines in sequence.
-     * After the last line (address) is done, we wrap it in a clickable link.
+     * Runs the four lines in sequence. 
+     * When it finishes line4, it wraps that content in an <a> linking to Google Maps.
      */
-    async function runTypingSequence() {
-      for (let i = 0; i < lines.length; i++) {
-        const { id, text } = lines[i];
+    async function runTyping() {
+      for (let i = 0; i < linesData.length; i++) {
+        const { id, text } = linesData[i];
         const el = document.getElementById(id);
 
-        // If this is the address line, type first then wrap as link
         if (id === "line4") {
-          await typeIt(el, text, 40); // faster: 40ms per char
-          // Now replace plain text with <a> to Google Maps
-          const googleURL = 
-            "https://www.google.com/maps?q=Via+Zanella,+23,+36050+Montorso+Vicentino+VI&" +
-            "ftid=0x477f48754a0cbe65:0x4a5b049d1ede99a6&entry=gps";
-          // Grab the fully typed inner text (including <br>), then wrap
-          el.innerHTML = `<a href="${googleURL}" target="_blank">${el.innerText}</a>`;
+          // Type the address (with newline→<br>), then wrap as a link
+          await typeText(el, text, 40);
+          const mapURL = "https://www.google.com/maps?" +
+                         "q=Via+Zanella,+23,+36050+Montorso+Vicentino+VI&" +
+                         "ftid=0x477f48754a0cbe65:0x4a5b049d1ede99a6&entry=gps";
+          // Grab the fully typed text (including <br>), then rebuild with <a>
+          el.innerHTML = `<a href="${mapURL}" target="_blank">${el.innerText}</a>`;
         } else {
-          // For other lines (date, time, cost), just type normally
-          await typeIt(el, text, 40);
+          // Type date, time, or cost
+          await typeText(el, text, 40);
         }
 
-        // Short pause before next line
+        // Short pause (200ms) before moving to the next line
         await new Promise(res => setTimeout(res, 200));
       }
     }
 
-    // Start as soon as the page loads
-    runTypingSequence();
+    // Start automatically on page load
+    runTyping();
   </script>
 </body>
 </html>

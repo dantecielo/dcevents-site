@@ -8,6 +8,7 @@
       font-family: 'VCR OSD Mono';
       src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf') format('truetype');
     }
+    
     html, body {
       margin: 0;
       padding: 0;
@@ -15,44 +16,30 @@
       color: #000;
       font-family: 'VCR OSD Mono', monospace;
       text-align: center;
-      overflow-x: hidden;
-    }
-    body {
-      padding: 2rem 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .container {
-      width: 90%;
-      max-width: 400px;
-      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
 
-    .info-line {
-      font-size: clamp(2rem, 6vw, 3rem);
-      line-height: 1.2;
-      margin: 1.5rem 0;
+    .info-line, .details {
+      font-size: clamp(2.5rem, 6vw, 3rem);
+      line-height: 1.3;
       white-space: nowrap;
-      overflow: hidden;
-      display: block;
     }
 
-    .details {
-      font-size: clamp(1.4rem, 5vw, 1.8rem);
-      line-height: 1.4;
-      margin: 1rem 0;
-    }
     .details a {
       color: black;
       text-decoration: none;
     }
     .details a:hover {
       text-decoration: underline;
-    }
-
-    @media (max-width: 350px) {
-      .container { max-width: 95%; }
-      .info-line { font-size: 1.8rem; }
-      .details { font-size: 1.4rem; }
     }
   </style>
 </head>
@@ -69,24 +56,16 @@
       { selector: "#line1", text: "08.06.25" },
       { selector: "#line2", text: "14.45 - 20.00" },
       { selector: "#cost",  text: "15€" },
-      { selector: "#address", text: "Via Zanella, 23\nMontorso Vicentino (VI)" }
+      { selector: "#address", text: "<a href='https://www.google.com/maps/place/Via+Zanella,+23,+36050+Montorso+Vicentino+VI/@45.4909463,11.3594171,17z/data=!3m1!4b1!4m6!3m5!1s0x477f48754a0cbe65:0x4a5b049d1ede99a6!8m2!3d45.4909463!4d11.3594171!16s%2Fg%2F11c2g9m43j?entry=ttu&g_ep=EgoyMDI1MDUyOC4wIKXMDSoASAFQAw%3D%3D' target='_blank'>Via Zanella, 23<br>Montorso Vicentino (VI)</a>" }
     ];
 
-    async function typeLine(el, text) {
-      for (let char of text) {
-        el.innerHTML += char === '\n' ? '<br>' : char;
-        await new Promise(res => setTimeout(res, 80));
-      }
+    function displayText() {
+      lines.forEach(({ selector, text }) => {
+        document.querySelector(selector).innerHTML = text;
+      });
     }
 
-    async function runTyping() {
-      for (let { selector, text } of lines) {
-        const el = document.querySelector(selector);
-        await typeLine(el, text);
-      }
-    }
-    
-    runTyping();
+    displayText();
   </script>
 </body>
 </html>

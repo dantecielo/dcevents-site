@@ -1,12 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta charset="UTF-8">
   <title>DC Events</title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.2">
-  <style type="text/css">
+  <style>
     @font-face {
       font-family: 'VCR OSD Mono';
       src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf')
@@ -16,44 +14,23 @@
       margin: 0;
       font-family: 'VCR OSD Mono', monospace;
       text-align: center;
-    }
-    .info {
-      font-size: clamp(1.5rem, 6vw, 3.5rem);
-      line-height: 1.2;
-      margin: 2rem 0;
-      font-weight: normal; /* Ensures text is normal weight */
-    }
-    .links {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      margin: 0 auto;
-      width: fit-content;
-    }
-    .links a {
-      display: block;
-      font-size: clamp(1rem, 4vw, 2rem);
-      margin: 1.5em 0;
-      text-decoration: none;
-      color: black;
-      font-weight: normal; /* Ensures links are NOT bold */
-    }
-    .links a:hover {
-      text-decoration: underline;
+      padding-top: 2rem;
+      background: #fff;
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <div class="info">
-    07.06.25<br>
-    21.00 – 02.00<br>
-    Private location
-  </div>
-  <div class="links">
-    <a href="location.html">Click for address</a>
-    <a href="previous-events.html">Click for previous event photos</a>
-    <a href="future-events.html">Click for future events</a>
-  </div>
+  <script>
+    // Password gate on the home page
+    var pwd = prompt("Enter password:");
+    if (pwd === "dc") {
+      window.location.href = "mail-info.html";
+    } else {
+      alert("Incorrect password");
+      // Reload so they can try again
+      window.location.href = "index.html";
+    }
+  </script>
 </body>
 </html>

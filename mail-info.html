@@ -7,25 +7,26 @@
   <style>
     @font-face {
       font-family: 'VCR OSD Mono';
-      src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf') format('truetype');
+      src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf')
+           format('truetype');
     }
     body {
       margin: 0;
-      padding: 2rem 1rem;
+      padding: 3rem 1rem;              /* more vertical padding */
       font-family: 'VCR OSD Mono', monospace;
       text-align: center;
       background: #fff;
       color: #000;
     }
     .info {
-      font-size: clamp(1.5rem, 6vw, 3.5rem);
-      line-height: 1.2;
-      margin-bottom: 2rem;
+      font-size: clamp(1.75rem, 6vw, 4rem); /* slightly larger */
+      line-height: 1.3;
+      margin-bottom: 3rem;                  /* more space below */
     }
     .details {
-      font-size: clamp(1rem, 4vw, 2rem);
-      line-height: 1.4;
-      margin: 1rem 0;
+      font-size: clamp(1.25rem, 4vw, 2.25rem);
+      line-height: 1.6;
+      margin: 2rem 0;                       /* extra spacing between lines */
     }
     .details a {
       color: black;
@@ -37,11 +38,19 @@
   </style>
 </head>
 <body>
-  <div class="info">08.06.25<br>14.45 – 20.00</div>
+  <div class="info">
+    08.06.25<br>
+    14.45 – 20.00
+  </div>
   <div class="details">
-    15€<br>
-    <a href="https://www.google.com/maps?q=Via+Zanella,+23,+36050+Montorso+Vicentino+VI&ftid=0x477f48754a0cbe65:0x4a5b049d1ede99a6&entry=gps" target="_blank">Google Maps</a><br>
-    Il costo include da bere e da mangiare.
+    15€<br><br>
+    <a
+      href="https://www.google.com/maps?q=Via+Zanella,+23,+36050+Montorso+Vicentino+VI&ftid=0x477f48754a0cbe65:0x4a5b049d1ede99a6&entry=gps"
+      target="_blank"
+    >
+      Via Zanella, 23<br>
+      Montorso Vicentino (VI)
+    </a><br><br>
   </div>
 </body>
 </html>

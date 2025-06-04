@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DC Events – Payment Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* Reset and basic layout */
+    body {
+      margin: 0;
+      padding: 1rem;
+      font-family: 'VCR OSD Mono', monospace;
+      background-color: #fff;
+      color: #000;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 1rem;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+    }
+    .sheet-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 700px; /* You can increase/decrease this if needed */
+      border: none;
+    }
+    @media (max-width: 600px) {
+      iframe {
+        height: 500px; /* Slightly shorter on small screens */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>DC Events – Payment Log</h1>
+  <div class="sheet-container">
+    <!-- Embed your published sheet here -->
+    <iframe
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRZMe_3XghJa-yVb9QbZr-bDBJCsdV6vmwLvFjqHreZ0aM82bZhB0w_00qDXYL3gDS2pjxnm_A44k-r/pubhtml?gid=0&single=true"
+      scrolling="yes"
+    ></iframe>
+  </div>
+
+</body>
+</html>

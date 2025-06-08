@@ -49,6 +49,7 @@
     <div id="line2" class="info-line"></div>
     <div id="cost" class="details"></div>
     <div id="address" class="details"></div>
+    <div id="livestream" class="details"></div> <!-- Livestream section added -->
   </div>
 
   <script>
@@ -56,7 +57,8 @@
       { selector: "#line1", text: "09.06.25" },
       { selector: "#line2", text: "14.45 - 20.00" },
       { selector: "#cost",  text: "15€" },
-      { selector: "#address", text: "<a href='https://maps.app.goo.gl/mTPVvrQ6wp2y7Yd68?g_st=ic' target='_blank'>Via Zanella, 23<br>Montorso Vicentino (VI)</a>" }
+      { selector: "#address", text: "<a href='https://maps.app.goo.gl/mTPVvrQ6wp2y7Yd68?g_st=ic' target='_blank'>Via Zanella, 23<br>Montorso Vicentino (VI)</a>" },
+      { selector: "#livestream", text: "<a href='https://youtube.com/live/iQuwO6tkuBU' target='_blank'>🎥 Watch Live Here</a>" } // Livestream link added
     ];
 
     async function typeLine(el, text) {
@@ -70,8 +72,8 @@
     async function runTyping() {
       for (let { selector, text } of lines) {
         const el = document.querySelector(selector);
-        if (selector === "#address") {
-          el.innerHTML = text; // Instantly show the address (avoiding broken links)
+        if (selector === "#address" || selector === "#livestream") {
+          el.innerHTML = text; // Instantly show address and livestream link
         } else {
           await typeLine(el, text); // Animate other elements letter by letter
         }

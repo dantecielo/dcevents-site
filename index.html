@@ -1,35 +1,85 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-  "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>DC Events</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>dc events</title>
   <style>
     @font-face {
       font-family: 'VCR OSD Mono';
-      src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf')
-           format('truetype');
+      src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf') format('truetype');
     }
+    
     body {
       margin: 0;
+      padding: 1rem;
       font-family: 'VCR OSD Mono', monospace;
-      text-align: center;
-      padding-top: 2rem;
       background: #fff;
       color: #000;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
+
+    .title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 2rem;
+      font-weight: bold;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .links a {
+      font-size: clamp(1rem, 4vw, 2rem);
+      text-decoration: none;
+      color: #000;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
+
+  <div id="title" class="title"></div>
+  <nav id="links" class="links"></nav>
+
   <script>
-    var pwd = prompt("Enter password:");
-    if (pwd === "dc") {
-      window.location.href = "09-06-25.html";
-    } else {
-      alert("Incorrect password");
-      // Let them try again
-      window.location.href = "index.html";
+    const textLines = [
+      { selector: "#title", text: "DC Events" },
+      { selector: "#links", text: `
+        <a href='location.html'>Click for address</a> |
+        <a href='previous-events.html'>Click for previous events</a> |
+        <a href='future-events.html'>Click for future events</a> |
+        <a href='family-archives.html'>Click for family archives</a>
+      ` }
+    ];
+
+    async function typeLine(el, text) {
+      el.innerHTML = ""; // Clear content before typing
+      for (let char of text) {
+        el.innerHTML += char === '\n' ? '<br>' : char;
+        await new Promise(res => setTimeout(res, 40)); // Fast typing speed
+      }
     }
+
+    async function runTyping() {
+      for (let { selector, text } of textLines) {
+        const el = document.querySelector(selector);
+        await typeLine(el, text); // Type out everything fast
+      }
+    }
+
+    runTyping();
   </script>
+
 </body>
 </html>

@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>09-06-25 Event Info</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     @font-face {
       font-family: 'VCR OSD Mono';
-      src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf') format('truetype');
+      src: url('https://cdn.jsdelivr.net/gh/dantecielo/vsrmono/VCR_OSD_MONO_1.001%5B1%5D.ttf')
+           format('truetype');
     }
     
     html, body {
@@ -55,7 +57,7 @@
     const lines = [
       { selector: "#line1", text: "09.06.25" },
       { selector: "#line2", text: "14.45 - 20.00" },
-      { selector: "#cost",  text: "15€" },
+      { selector: "#cost",  text: "7€" },
       { selector: "#address", text: "<a href='https://maps.app.goo.gl/mTPVvrQ6wp2y7Yd68?g_st=ic' target='_blank'>Via Zanella, 23<br>Montorso Vicentino (VI)</a>" }
     ];
 
@@ -63,7 +65,7 @@
       el.innerHTML = ""; // Clear existing content
       for (let char of text) {
         el.innerHTML += char === '\n' ? '<br>' : char;
-        await new Promise(res => setTimeout(res, 80)); // Delay for typewriter effect
+        await new Promise(res => setTimeout(res, 80));
       }
     }
 
@@ -71,9 +73,9 @@
       for (let { selector, text } of lines) {
         const el = document.querySelector(selector);
         if (selector === "#address") {
-          el.innerHTML = text; // Instantly show address
+          el.innerHTML = text; // show address instantly
         } else {
-          await typeLine(el, text); // Animate other elements letter by letter
+          await typeLine(el, text);
         }
       }
     }
